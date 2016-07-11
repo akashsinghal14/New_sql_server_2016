@@ -1,0 +1,23 @@
+create procedure predictsalary
+as 
+begin
+exec sp_execute_external_script
+	@language = N'R'
+	,@script = N'
+				PredictSal <- InputDataSet
+				PredictSal <- setNames(PredictSal,c("Age","Experience","Gender"))
+				PredictSal$Age <- as.numeric(as.character(PredictSal$Age))
+				PredictSal$Experience <- as.numeric(as.character(predictSal$Experience))
+				PredictSal$Salary <-0
+				PredictSal$Salary<- ifelse(PredictSal$Gender == "Male"
+				,((-13061124)) + ((-473000)) * PredictSal$Experience) + (592065 * PredictSal$Age) + 683640
+				,((-13061124)) + ((-473000)) * PredictSal$Experience) + (592065 * PredictSal$Age) )))
+				OutputDataSet<-PredictSal'
+		,@input_data_1=N'select age,experience,gender from ---  where salary is null and type="predicted"
+		,@output_data_1_name = N'outputdataset'
+		with result sets ((age int not null,
+						experience float not null,
+						gender varchar(10) not null
+						salary int not null));
+end						
+				
